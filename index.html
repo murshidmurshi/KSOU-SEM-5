@@ -1,175 +1,702 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>BCA 5th Sem Lab Programs</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-/* Layout: one reading column; sticky lab switcher; each program = question box + solution steps with copyable code */
-:root{
-  color-scheme: light;
-  --bg:#f7f8fa; --paper:#ffffff; --fg:#1d2433; --muted:#5b6475; --line:#dde2ea;
-  --code-bg:#f2f5f9; --code-fg:#1f2a3c; --accent:#1f5fa8; --accent-soft:#e7effa;
-  --db:#1f5fa8; --ml:#a24a12; --bd:#2f7a4a;
-  --kw:#7a2fa0; --str:#1d7a3a; --cm:#7a8494; --num:#b4530f;
-  --display:"Literata", Georgia, serif;
-  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", Consolas, "Courier New", monospace;
-}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
-.wrap{max-width:860px;margin:0 auto}
-header.top{padding-block:32px 16px}
-.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
-h1{font-family:var(--display);font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 8px;text-wrap:balance}
-.lede{color:var(--muted);margin:0;max-width:62ch}
-nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);margin-bottom:24px}
-nav.tabs a{text-decoration:none;color:var(--fg);font-weight:500;font-size:14px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
-nav.tabs a:hover,nav.tabs a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
-.lab{margin-bottom:48px;scroll-margin-top:70px}
-.lab-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;border-bottom:2px solid var(--c);padding-bottom:8px;margin-bottom:20px}
-.lab-head h2{font-family:var(--display);font-size:24px;margin:0;color:var(--c)}
-.where{font-size:13px;color:var(--muted)}
-.where b{color:var(--fg);font-family:var(--mono);font-weight:500}
-.where a{color:var(--c);font-family:var(--mono);font-weight:500}
-.howto{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:8px;padding:12px 16px;margin-bottom:20px}
-.howto h4{margin:0 0 6px;font-size:14px}
-.howto ol,.howto ul{margin:0;padding-left:20px}
-.howto a{color:var(--c);font-weight:500}
-.note{font-size:14px;color:var(--muted);margin:10px 0 0}
-.avoid{background:#fff6ec;border:1px solid #f0d6b8;border-radius:8px;padding:12px 16px;margin-bottom:24px}
-.avoid h4{margin:0 0 6px;font-size:14px;color:#8a4a10}
-.avoid ul{margin:0;padding-left:20px}
-.prog{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:24px}
-.prog h3{font-family:var(--display);font-size:19px;margin:0 0 4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.tag{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--c);border:1px solid var(--c);border-radius:4px;padding:1px 7px}
-.question{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:12px 0 16px}
-.question p{margin:0 0 6px}
-.question ol{margin:0;padding-left:22px}
-.schema{font-family:var(--mono);font-size:13px}
-.sol{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.step{margin:14px 0 6px;font-weight:500}
-.code{position:relative;background:var(--code-bg);border:1px solid var(--line);border-radius:8px;margin:0 0 4px}
-.code pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.55;color:var(--code-fg)}
-.copy{position:absolute;top:6px;right:6px;font:500 12px var(--body);background:var(--paper);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer}
-.copy:hover,.copy:focus-visible{color:var(--accent);border-color:var(--accent);outline:none}
-.out{margin-top:14px}
-.out .code{background:var(--paper)}
-.out .label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--str);margin-bottom:6px}
-.k{color:var(--kw);font-weight:500}.s{color:var(--str)}.c{color:var(--cm);font-style:italic}.n{color:var(--num)}
-footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
-@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-</style>
+<!doctype html>
+<html>
 
-<div class="wrap">
-<header class="top">
-  <div class="eyebrow">KSOU · BCA 5th Semester</div>
-  <h1>Lab Programs: 2 from each lab</h1>
-  <p class="lede">DBMS, Machine Learning and Big Data Analytics. Each program shows the question number from the manual, the question, and a short corrected solution.</p>
-  <p class="note">In the exam you usually write the program on the answer sheet, run it on the lab computer, show the output, and answer viva questions. Confirm with your exam centre how many programs you have to pick.</p>
-</header>
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
 
-<nav class="tabs">
-  <a href="#dbms">DBMS</a>
-  <a href="#ml">Machine Learning</a>
-  <a href="#bda">Big Data Analytics</a>
-</nav>
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
 
-<!-- ============ DBMS ============ -->
-<section class="lab" id="dbms" style="--c:var(--db)">
-  <div class="lab-head"><h2>DBMS Lab</h2><span class="where">Run on <a href="https://livesql.oracle.com" target="_blank" rel="noopener">livesql.oracle.com</a> or Oracle SQL*Plus</span></div>
-  <div class="howto">
-    <h4>How to run</h4>
-    <ol>
-      <li>In the lab: open Oracle SQL*Plus or Oracle SQL Developer.</li>
-      <li>At home: open <a href="https://livesql.oracle.com" target="_blank" rel="noopener">Oracle Live SQL</a> and sign up with a free Oracle account.</li>
-      <li>Paste the SQL statements and click <b>Run</b>. Nothing to install.</li>
-    </ol>
-  </div>
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
 
-  <article class="prog">
-    <h3>Program 1: STUDENT table <span class="tag">PDF Program 1</span></h3>
-    <div class="question">
-      <p>The STUDENT detail database has a table with the following attributes.</p>
-      <p class="schema">STUDENT (regno: int, name: string, dob: date, marks: int)</p>
-      <ol type="i">
-        <li>Create the above table.</li>
-        <li>Remove the existing attributes from the table.</li>
-        <li>Change the data type of regno from integer to string.</li>
-        <li>Add a new attribute phoneno to the existing table.</li>
-        <li>Enter five tuples into the table.</li>
-        <li>Display all the tuples in student table.</li>
-      </ol>
-    </div>
-    <p class="sol">Solution</p>
-    <p class="step">i) Create the above table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">CREATE TABLE</span> student (regno <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, name <span class="k">VARCHAR2</span>(20), dob <span class="k">DATE</span>, marks <span class="k">NUMBER</span>(3));</pre></div>
-    <p class="step">ii) Remove the existing attributes from the table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">ALTER TABLE</span> student <span class="k">DROP COLUMN</span> marks;</pre></div>
-    <p class="step">iii) Change the data type of regno from integer to string.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">ALTER TABLE</span> student <span class="k">MODIFY</span> regno <span class="k">VARCHAR2</span>(20);</pre></div>
-    <p class="step">iv) Add a new attribute phoneno to the existing table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">ALTER TABLE</span> student <span class="k">ADD</span> phoneno <span class="k">NUMBER</span>(10);</pre></div>
-    <p class="step">v) Enter five tuples into the table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'101'</span>, <span class="s">'Mini'</span>,  TO_DATE(<span class="s">'04-06-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543210</span>);
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <title>BCA 5th Sem Lab Programs</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    /* Layout: one reading column; sticky lab switcher; each program = question box + solution steps with copyable code */
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --paper: #ffffff;
+      --fg: #1d2433;
+      --muted: #5b6475;
+      --line: #dde2ea;
+      --code-bg: #f2f5f9;
+      --code-fg: #1f2a3c;
+      --accent: #1f5fa8;
+      --accent-soft: #e7effa;
+      --db: #1f5fa8;
+      --ml: #a24a12;
+      --bd: #2f7a4a;
+      --full-bg: #fffaeb;
+      --full-head: #fff1c9;
+      --full-line: #ecd38a;
+      --full-fg: #7a5600;
+      --kw: #7a2fa0;
+      --str: #1d7a3a;
+      --cm: #7a8494;
+      --num: #b4530f;
+      --display: "Literata", Georgia, serif;
+      --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.6;
+      padding-inline: 16px;
+      padding-block: 0 48px
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto
+    }
+
+    header.top {
+      padding-block: 32px 16px
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(26px, 5vw, 36px);
+      line-height: 1.15;
+      margin: 6px 0 8px;
+      text-wrap: balance
+    }
+
+    .lede {
+      color: var(--muted);
+      margin: 0;
+      max-width: 62ch
+    }
+
+    nav.tabs {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 5;
+      background: var(--bg);
+      padding-block: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px
+    }
+
+    nav.tabs a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 7px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper)
+    }
+
+    nav.tabs a:hover,
+    nav.tabs a:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      outline: none
+    }
+
+    .lab {
+      margin-bottom: 48px;
+      scroll-margin-top: 70px
+    }
+
+    .lab-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 14px;
+      border-bottom: 2px solid var(--c);
+      padding-bottom: 8px;
+      margin-bottom: 20px
+    }
+
+    .lab-head h2 {
+      font-family: var(--display);
+      font-size: 24px;
+      margin: 0;
+      color: var(--c)
+    }
+
+    .where {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .where b {
+      color: var(--fg);
+      font-family: var(--mono);
+      font-weight: 500
+    }
+
+    .where a {
+      color: var(--c);
+      font-family: var(--mono);
+      font-weight: 500
+    }
+
+    .howto {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--c);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px
+    }
+
+    .howto h4 {
+      margin: 0 0 6px;
+      font-size: 14px
+    }
+
+    .howto ol,
+    .howto ul {
+      margin: 0;
+      padding-left: 20px
+    }
+
+    .howto a {
+      color: var(--c);
+      font-weight: 500
+    }
+
+    .runopts {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line)
+    }
+
+    .runopts h4 {
+      margin: 0 0 6px
+    }
+
+    .runopts li {
+      margin-bottom: 4px
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 0 6px;
+      margin-left: 4px;
+      background: var(--accent-soft);
+      color: var(--c)
+    }
+
+    .note {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 10px 0 0
+    }
+
+    .avoid {
+      background: #fff6ec;
+      border: 1px solid #f0d6b8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px
+    }
+
+    .avoid h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #8a4a10
+    }
+
+    .avoid ul {
+      margin: 0;
+      padding-left: 20px
+    }
+
+    .prog {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 24px
+    }
+
+    .prog h3 {
+      font-family: var(--display);
+      font-size: 19px;
+      margin: 0 0 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center
+    }
+
+    .tag {
+      font-family: var(--body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--c);
+      border: 1px solid var(--c);
+      border-radius: 4px;
+      padding: 1px 7px
+    }
+
+    .question {
+      background: var(--accent-soft);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0 16px
+    }
+
+    .question p {
+      margin: 0 0 6px
+    }
+
+    .question ol {
+      margin: 0;
+      padding-left: 22px
+    }
+
+    .schema {
+      font-family: var(--mono);
+      font-size: 13px
+    }
+
+    .sol {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 8px
+    }
+
+    .step {
+      margin: 14px 0 6px;
+      font-weight: 500
+    }
+
+    .code {
+      position: relative;
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 0 0 4px
+    }
+
+    .code pre {
+      margin: 0;
+      padding: 12px 14px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--code-fg)
+    }
+
+    .copy {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font: 500 12px var(--body);
+      background: var(--paper);
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer
+    }
+
+    .copy:hover,
+    .copy:focus-visible {
+      color: var(--accent);
+      border-color: var(--accent);
+      outline: none
+    }
+
+    .out {
+      margin-top: 14px
+    }
+
+    .out .code {
+      background: var(--paper)
+    }
+
+    .out .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--str);
+      margin-bottom: 6px
+    }
+
+    .k {
+      color: var(--kw);
+      font-weight: 500
+    }
+
+    .s {
+      color: var(--str)
+    }
+
+    .c {
+      color: var(--cm);
+      font-style: italic
+    }
+
+    .n {
+      color: var(--num)
+    }
+
+    .full {
+      background: var(--full-bg);
+      border: 1px solid var(--full-line);
+      border-radius: 10px;
+      margin-top: 20px;
+      overflow: hidden
+    }
+
+    .full-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--full-line);
+      background: var(--full-head)
+    }
+
+    .full-head span {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--full-fg)
+    }
+
+    .full-head small {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .copy-all {
+      position: static;
+      font: 600 13px var(--body);
+      background: var(--full-fg);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer
+    }
+
+    .copy-all:hover,
+    .copy-all:focus-visible {
+      background: var(--accent);
+      outline: 2px solid var(--full-line);
+      outline-offset: 1px
+    }
+
+    .full pre {
+      margin: 0;
+      padding: 14px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--code-fg);
+      max-height: 520px;
+      overflow-y: auto
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px
+    }
+
+    @media (prefers-reduced-motion:no-preference) {
+      html {
+        scroll-behavior: smooth
+      }
+    }
+  </style>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="eyebrow">KSOU · BCA 5th Semester</div>
+      <h1>Lab Programs: 2 from each lab</h1>
+      <p class="lede">DBMS, Machine Learning and Big Data Analytics. Each program shows the question number from the
+        manual, the question, and a short corrected solution.</p>
+      <p class="note">In the exam you usually write the program on the answer sheet, run it on the lab computer, show
+        the output, and answer viva questions. Confirm with your exam centre how many programs you have to pick.</p>
+    </header>
+
+    <nav class="tabs">
+      <a href="#dbms">DBMS</a>
+      <a href="#ml">Machine Learning</a>
+      <a href="#bda">Big Data Analytics</a>
+    </nav>
+
+    <!-- ============ DBMS ============ -->
+    <section class="lab" id="dbms" style="--c:var(--db)">
+      <div class="lab-head">
+        <h2>DBMS Lab</h2><span class="where">Run on <a href="https://livesql.oracle.com" target="_blank"
+            rel="noopener">livesql.oracle.com</a> or Oracle SQL*Plus</span>
+      </div>
+      <div class="howto">
+        <h4>How to run</h4>
+        <ol>
+          <li>In the lab: open Oracle SQL*Plus or Oracle SQL Developer.</li>
+          <li>At home: open <a href="https://livesql.oracle.com" target="_blank" rel="noopener">Oracle Live SQL</a> and
+            sign up with a free Oracle account.</li>
+          <li>Paste the SQL statements and click <b>Run</b>. Nothing to install.</li>
+        </ol>
+        <div class="runopts">
+          <h4>Other places to run (all free, all run Oracle)</h4>
+          <ul>
+            <li><a href="https://onecompiler.com/oracle" target="_blank" rel="noopener">OneCompiler</a> <span
+                class="pill">Easiest</span>: choose <b>Oracle Database</b>, paste the Full code and click <b>Run</b>. No
+              sign-up. Runs all lines at once. Log in only if you want to <b>Save</b>. It starts with an empty database
+              every run, so don't add <code>DROP TABLE</code>.</li>
+            <li><a href="https://freesql.com" target="_blank" rel="noopener">FreeSQL</a> (Oracle Live SQL moved here):
+              paste the code and click <b>Run Script</b> (the second button next to ▶) or press <b>F5</b>. Results show
+              in the <b>Script Output</b> tab. The ▶ button runs only the line your cursor is on.</li>
+            <li><a href="https://dbfiddle.uk" target="_blank" rel="noopener">db&lt;&gt;fiddle</a>: choose an Oracle
+              version from the dropdown, paste the code and click <b>Run</b>.</li>
+          </ul>
+          <p class="note">MySQL sites (sqlfiddle, programiz) will give errors, because they don't understand
+            <code>VARCHAR2</code>, <code>NUMBER</code>, <code>TO_DATE</code> or <code>MODIFY</code> written this way.
+          </p>
+        </div>
+      </div>
+
+      <article class="prog">
+        <h3>Program 1: STUDENT table <span class="tag">PDF Program 1</span></h3>
+        <div class="question">
+          <p>The STUDENT detail database has a table with the following attributes.</p>
+          <p class="schema">STUDENT (regno: int, name: string, dob: date, marks: int)</p>
+          <ol type="i">
+            <li>Create the above table.</li>
+            <li>Remove the existing attributes from the table.</li>
+            <li>Change the data type of regno from integer to string.</li>
+            <li>Add a new attribute phoneno to the existing table.</li>
+            <li>Enter five tuples into the table.</li>
+            <li>Display all the tuples in student table.</li>
+          </ol>
+        </div>
+        <p class="sol">Solution</p>
+        <p class="step">i) Create the above table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">CREATE TABLE</span> student (regno <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, name <span class="k">VARCHAR2</span>(20), dob <span class="k">DATE</span>, marks <span class="k">NUMBER</span>(3));</pre>
+        </div>
+        <p class="step">ii) Remove the existing attributes from the table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">ALTER TABLE</span> student <span class="k">DROP COLUMN</span> marks;</pre>
+        </div>
+        <p class="step">iii) Change the data type of regno from integer to string.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">ALTER TABLE</span> student <span class="k">MODIFY</span> regno <span class="k">VARCHAR2</span>(20);</pre>
+        </div>
+        <p class="step">iv) Add a new attribute phoneno to the existing table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">ALTER TABLE</span> student <span class="k">ADD</span> phoneno <span class="k">NUMBER</span>(10);</pre>
+        </div>
+        <p class="step">v) Enter five tuples into the table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'101'</span>, <span class="s">'Mini'</span>,  TO_DATE(<span class="s">'04-06-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543210</span>);
 <span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'102'</span>, <span class="s">'Ravi'</span>,  TO_DATE(<span class="s">'12-08-2003'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543211</span>);
 <span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'103'</span>, <span class="s">'Asha'</span>,  TO_DATE(<span class="s">'23-01-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543212</span>);
 <span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'104'</span>, <span class="s">'Kiran'</span>, TO_DATE(<span class="s">'15-11-2003'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543213</span>);
-<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'105'</span>, <span class="s">'Neha'</span>,  TO_DATE(<span class="s">'30-03-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543214</span>);</pre></div>
-    <p class="step">vi) Display all the tuples in student table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> student;</pre></div>
-  </article>
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'105'</span>, <span class="s">'Neha'</span>,  TO_DATE(<span class="s">'30-03-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543214</span>);</pre>
+        </div>
+        <p class="step">vi) Display all the tuples in student table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> student;</pre>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 1: STUDENT table<small>All the code of this program in one
+                place. Paste it and run it at once.</small></span><button class="copy copy-all" type="button">Copy all
+              code</button></div>
+          <pre><span class="k">CREATE TABLE</span> student (regno <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, name <span class="k">VARCHAR2</span>(20), dob <span class="k">DATE</span>, marks <span class="k">NUMBER</span>(3));
 
-  <article class="prog">
-    <h3>Program 2: LIBRARY table <span class="tag">PDF Program 2</span></h3>
-    <div class="question">
-      <p>A LIBRARY database has a table with the following attributes.</p>
-      <p class="schema">LIBRARY (bookid: int, title: string, author: string, publication: string, yearpub: int, price: real)</p>
-      <ol type="i">
-        <li>Create the above table.</li>
-        <li>Enter five tuples into the table.</li>
-        <li>Display all the tuples in the table.</li>
-        <li>Display the different publishers from the list.</li>
-        <li>Arrange the tuples in the alphabetical order of the book titles.</li>
-        <li>List the details of all the books whose price ranges between Rs. 100 and Rs. 300.</li>
-      </ol>
-    </div>
-    <p class="sol">Solution</p>
-    <p class="step">i) Create the above table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">CREATE TABLE</span> library (bookid <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, title <span class="k">VARCHAR2</span>(30), author <span class="k">VARCHAR2</span>(20),
-publication <span class="k">VARCHAR2</span>(20), yearpub <span class="k">NUMBER</span>(4), price <span class="k">NUMBER</span>(7,2));</pre></div>
-    <p class="step">ii) Enter five tuples into the table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">1</span>, <span class="s">'Computer Networks'</span>, <span class="s">'Tanenbaum'</span>, <span class="s">'Pearson'</span>, <span class="n">2010</span>, <span class="n">450</span>);
+<span class="k">ALTER TABLE</span> student <span class="k">DROP COLUMN</span> marks;
+
+<span class="k">ALTER TABLE</span> student <span class="k">MODIFY</span> regno <span class="k">VARCHAR2</span>(20);
+
+<span class="k">ALTER TABLE</span> student <span class="k">ADD</span> phoneno <span class="k">NUMBER</span>(10);
+
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'101'</span>, <span class="s">'Mini'</span>,  TO_DATE(<span class="s">'04-06-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543210</span>);
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'102'</span>, <span class="s">'Ravi'</span>,  TO_DATE(<span class="s">'12-08-2003'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543211</span>);
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'103'</span>, <span class="s">'Asha'</span>,  TO_DATE(<span class="s">'23-01-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543212</span>);
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'104'</span>, <span class="s">'Kiran'</span>, TO_DATE(<span class="s">'15-11-2003'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543213</span>);
+<span class="k">INSERT INTO</span> student <span class="k">VALUES</span> (<span class="s">'105'</span>, <span class="s">'Neha'</span>,  TO_DATE(<span class="s">'30-03-2004'</span>,<span class="s">'DD-MM-YYYY'</span>), <span class="n">9876543214</span>);
+
+<span class="k">SELECT</span> * <span class="k">FROM</span> student;</pre>
+        </div>
+      </article>
+
+      <article class="prog">
+        <h3>Program 2: LIBRARY table <span class="tag">PDF Program 2</span></h3>
+        <div class="question">
+          <p>A LIBRARY database has a table with the following attributes.</p>
+          <p class="schema">LIBRARY (bookid: int, title: string, author: string, publication: string, yearpub: int,
+            price: real)</p>
+          <ol type="i">
+            <li>Create the above table.</li>
+            <li>Enter five tuples into the table.</li>
+            <li>Display all the tuples in the table.</li>
+            <li>Display the different publishers from the list.</li>
+            <li>Arrange the tuples in the alphabetical order of the book titles.</li>
+            <li>List the details of all the books whose price ranges between Rs. 100 and Rs. 300.</li>
+          </ol>
+        </div>
+        <p class="sol">Solution</p>
+        <p class="step">i) Create the above table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">CREATE TABLE</span> library (bookid <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, title <span class="k">VARCHAR2</span>(30), author <span class="k">VARCHAR2</span>(20),
+publication <span class="k">VARCHAR2</span>(20), yearpub <span class="k">NUMBER</span>(4), price <span class="k">NUMBER</span>(7,2));</pre>
+        </div>
+        <p class="step">ii) Enter five tuples into the table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">1</span>, <span class="s">'Computer Networks'</span>, <span class="s">'Tanenbaum'</span>, <span class="s">'Pearson'</span>, <span class="n">2010</span>, <span class="n">450</span>);
 <span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">2</span>, <span class="s">'DBMS'</span>, <span class="s">'Navathe'</span>, <span class="s">'Pearson'</span>, <span class="n">2007</span>, <span class="n">299</span>);
 <span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">3</span>, <span class="s">'Java Basics'</span>, <span class="s">'Balagurusamy'</span>, <span class="s">'McGraw Hill'</span>, <span class="n">2015</span>, <span class="n">250</span>);
 <span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">4</span>, <span class="s">'Operating Systems'</span>, <span class="s">'Galvin'</span>, <span class="s">'Wiley'</span>, <span class="n">2012</span>, <span class="n">520</span>);
-<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">5</span>, <span class="s">'C Programming'</span>, <span class="s">'Kanetkar'</span>, <span class="s">'BPB'</span>, <span class="n">2016</span>, <span class="n">180</span>);</pre></div>
-    <p class="step">iii) Display all the tuples in the table.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> library;</pre></div>
-    <p class="step">iv) Display the different publishers from the list.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT DISTINCT</span> publication <span class="k">FROM</span> library;</pre></div>
-    <p class="step">v) Arrange the tuples in the alphabetical order of the book titles.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">ORDER BY</span> title <span class="k">ASC</span>;</pre></div>
-    <p class="step">vi) List the books whose price is between Rs. 100 and Rs. 300.</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">WHERE</span> price <span class="k">BETWEEN</span> <span class="n">100</span> <span class="k">AND</span> <span class="n">300</span>;</pre></div>
-  </article>
-</section>
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">5</span>, <span class="s">'C Programming'</span>, <span class="s">'Kanetkar'</span>, <span class="s">'BPB'</span>, <span class="n">2016</span>, <span class="n">180</span>);</pre>
+        </div>
+        <p class="step">iii) Display all the tuples in the table.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> library;</pre>
+        </div>
+        <p class="step">iv) Display the different publishers from the list.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT DISTINCT</span> publication <span class="k">FROM</span> library;</pre>
+        </div>
+        <p class="step">v) Arrange the tuples in the alphabetical order of the book titles.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">ORDER BY</span> title <span class="k">ASC</span>;</pre>
+        </div>
+        <p class="step">vi) List the books whose price is between Rs. 100 and Rs. 300.</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">WHERE</span> price <span class="k">BETWEEN</span> <span class="n">100</span> <span class="k">AND</span> <span class="n">300</span>;</pre>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 2: LIBRARY table<small>All the code of this program in one
+                place. Paste it and run it at once.</small></span><button class="copy copy-all" type="button">Copy all
+              code</button></div>
+          <pre><span class="k">CREATE TABLE</span> library (bookid <span class="k">NUMBER</span>(10) <span class="k">PRIMARY KEY</span>, title <span class="k">VARCHAR2</span>(30), author <span class="k">VARCHAR2</span>(20),
+publication <span class="k">VARCHAR2</span>(20), yearpub <span class="k">NUMBER</span>(4), price <span class="k">NUMBER</span>(7,2));
 
-<!-- ============ ML ============ -->
-<section class="lab" id="ml" style="--c:var(--ml)">
-  <div class="lab-head"><h2>Machine Learning Lab</h2><span class="where">Run on <a href="https://colab.research.google.com" target="_blank" rel="noopener">colab.research.google.com</a></span></div>
-  <div class="howto">
-    <h4>How to run</h4>
-    <ol>
-      <li>Open <a href="https://colab.research.google.com" target="_blank" rel="noopener">Google Colab</a> and sign in with your Google account (free).</li>
-      <li>Click <b>New Notebook</b>.</li>
-      <li>Paste the code into a cell and press the Run button (or Shift+Enter). pandas, scikit-learn and matplotlib are already installed.</li>
-      <li>In the lab you may use Jupyter Notebook or Anaconda instead.</li>
-    </ol>
-  </div>
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">1</span>, <span class="s">'Computer Networks'</span>, <span class="s">'Tanenbaum'</span>, <span class="s">'Pearson'</span>, <span class="n">2010</span>, <span class="n">450</span>);
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">2</span>, <span class="s">'DBMS'</span>, <span class="s">'Navathe'</span>, <span class="s">'Pearson'</span>, <span class="n">2007</span>, <span class="n">299</span>);
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">3</span>, <span class="s">'Java Basics'</span>, <span class="s">'Balagurusamy'</span>, <span class="s">'McGraw Hill'</span>, <span class="n">2015</span>, <span class="n">250</span>);
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">4</span>, <span class="s">'Operating Systems'</span>, <span class="s">'Galvin'</span>, <span class="s">'Wiley'</span>, <span class="n">2012</span>, <span class="n">520</span>);
+<span class="k">INSERT INTO</span> library <span class="k">VALUES</span> (<span class="n">5</span>, <span class="s">'C Programming'</span>, <span class="s">'Kanetkar'</span>, <span class="s">'BPB'</span>, <span class="n">2016</span>, <span class="n">180</span>);
 
-  <article class="prog">
-    <h3>Program 8: Random Forest vs Decision Tree <span class="tag">PDF Program 8</span></h3>
-    <div class="question"><p>Write a program that implements Random Forest and compares its performance with a single Decision Tree for classification using the Iris dataset.</p></div>
-    <p class="sol">Solution</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_iris
+<span class="k">SELECT</span> * <span class="k">FROM</span> library;
+
+<span class="k">SELECT DISTINCT</span> publication <span class="k">FROM</span> library;
+
+<span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">ORDER BY</span> title <span class="k">ASC</span>;
+
+<span class="k">SELECT</span> * <span class="k">FROM</span> library <span class="k">WHERE</span> price <span class="k">BETWEEN</span> <span class="n">100</span> <span class="k">AND</span> <span class="n">300</span>;</pre>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ ML ============ -->
+    <section class="lab" id="ml" style="--c:var(--ml)">
+      <div class="lab-head">
+        <h2>Machine Learning Lab</h2><span class="where">Run on <a href="https://colab.research.google.com"
+            target="_blank" rel="noopener">colab.research.google.com</a></span>
+      </div>
+      <div class="howto">
+        <h4>How to run</h4>
+        <ol>
+          <li>Open <a href="https://colab.research.google.com" target="_blank" rel="noopener">Google Colab</a> and sign
+            in with your Google account (free).</li>
+          <li>Click <b>New Notebook</b>.</li>
+          <li>Paste the code into a cell and press the Run button (or Shift+Enter). pandas, scikit-learn and matplotlib
+            are already installed.</li>
+          <li>In the lab you may use Jupyter Notebook or Anaconda instead.</li>
+        </ol>
+        <div class="runopts">
+          <h4>Other places to run (all free)</h4>
+          <ul>
+            <li><a href="https://www.kaggle.com/code" target="_blank" rel="noopener">Kaggle Notebooks</a>: sign in,
+              click <b>New Notebook</b>, paste the Full code and press Run. pandas, scikit-learn and matplotlib are
+              already installed.</li>
+            <li><a href="https://jupyter.org/try" target="_blank" rel="noopener">Jupyter (try in browser)</a>: no
+              sign-up. If a library is missing, run <code>%pip install scikit-learn pandas matplotlib</code> in the
+              first cell.</li>
+            <li><b>On your own laptop</b>: install <a href="https://www.anaconda.com/download" target="_blank"
+                rel="noopener">Anaconda</a>, open Jupyter Notebook, and paste the code. All libraries come included.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <article class="prog">
+        <h3>Program 8: Random Forest vs Decision Tree <span class="tag">PDF Program 8</span></h3>
+        <div class="question">
+          <p>Write a program that implements Random Forest and compares its performance with a single Decision Tree for
+            classification using the Iris dataset.</p>
+        </div>
+        <p class="sol">Solution</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_iris
 <span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
 <span class="k">from</span> sklearn.tree <span class="k">import</span> DecisionTreeClassifier
 <span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
@@ -194,20 +721,63 @@ acc_forest = accuracy_score(y_test, rf.predict(X_test))
 
 <span class="c"># Step 5: Compare results</span>
 print(<span class="s">f"Decision Tree Accuracy: {acc_tree:.2f}"</span>)
-print(<span class="s">f"Random Forest Accuracy: {acc_forest:.2f}"</span>)</pre></div>
-    <div class="out"><div class="label">Output</div><div class="code"><pre>Decision Tree Accuracy: 1.00
-Random Forest Accuracy: 1.00</pre></div></div>
-    <p class="note">If your teacher wants the full classification report, add these lines at the end:</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">from</span> sklearn.metrics <span class="k">import</span> classification_report
+print(<span class="s">f"Random Forest Accuracy: {acc_forest:.2f}"</span>)</pre>
+        </div>
+        <div class="out">
+          <div class="label">Output</div>
+          <div class="code">
+            <pre>Decision Tree Accuracy: 1.00
+Random Forest Accuracy: 1.00</pre>
+          </div>
+        </div>
+        <p class="note">If your teacher wants the full classification report, add these lines at the end:</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">from</span> sklearn.metrics <span class="k">import</span> classification_report
 print(classification_report(y_test, dt.predict(X_test)))
-print(classification_report(y_test, rf.predict(X_test)))</pre></div>
-  </article>
+print(classification_report(y_test, rf.predict(X_test)))</pre>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 8: Random Forest vs Decision Tree<small>All the code of this
+                program in one place. Paste it and run it at once.</small></span><button class="copy copy-all"
+              type="button">Copy all code</button></div>
+          <pre><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_iris
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.tree <span class="k">import</span> DecisionTreeClassifier
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> accuracy_score
 
-  <article class="prog">
-    <h3>Program 9: Linear Regression <span class="tag">PDF Program 9</span></h3>
-    <div class="question"><p>Implement linear regression to predict a continuous variable (e.g. student grades) using a small dataset.</p></div>
-    <p class="sol">Solution</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="c"># Step 1: Load the dataset</span>
+data = load_iris()
+X, y = data.data, data.target
+
+<span class="c"># Step 2: Split into training and testing sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="n">0.3</span>, random_state=<span class="n">42</span>)
+
+<span class="c"># Step 3: Decision Tree</span>
+dt = DecisionTreeClassifier(random_state=<span class="n">42</span>)
+dt.fit(X_train, y_train)
+acc_tree = accuracy_score(y_test, dt.predict(X_test))
+
+<span class="c"># Step 4: Random Forest</span>
+rf = RandomForestClassifier(n_estimators=<span class="n">100</span>, random_state=<span class="n">42</span>)
+rf.fit(X_train, y_train)
+acc_forest = accuracy_score(y_test, rf.predict(X_test))
+
+<span class="c"># Step 5: Compare results</span>
+print(<span class="s">f"Decision Tree Accuracy: {acc_tree:.2f}"</span>)
+print(<span class="s">f"Random Forest Accuracy: {acc_forest:.2f}"</span>)</pre>
+        </div>
+      </article>
+
+      <article class="prog">
+        <h3>Program 9: Linear Regression <span class="tag">PDF Program 9</span></h3>
+        <div class="question">
+          <p>Implement linear regression to predict a continuous variable (e.g. student grades) using a small dataset.
+          </p>
+        </div>
+        <p class="sol">Solution</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">import</span> pandas <span class="k">as</span> pd
 <span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
 <span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
 <span class="k">from</span> sklearn.linear_model <span class="k">import</span> LinearRegression
@@ -246,119 +816,280 @@ plt.show()
 
 <span class="c"># Step 6: Predict new data</span>
 new = pd.DataFrame({<span class="s">'Hours_Study'</span>:[3], <span class="s">'Classes_Attended'</span>:[14], <span class="s">'Previous_Test_Scores'</span>:[72]})
-print(<span class="s">f"Predicted Final Grade: {model.predict(new)[0]:.2f}"</span>)</pre></div>
-    <div class="out"><div class="label">Output</div><div class="code"><pre>Mean Squared Error (MSE): 58.61
+print(<span class="s">f"Predicted Final Grade: {model.predict(new)[0]:.2f}"</span>)</pre>
+        </div>
+        <div class="out">
+          <div class="label">Output</div>
+          <div class="code">
+            <pre>Mean Squared Error (MSE): 58.61
 R-squared (R2): 0.56
 Predicted Final Grade: 76.81
-(plus a graph of study hours vs final grade)</pre></div></div>
-  </article>
-</section>
+(plus a graph of study hours vs final grade)</pre>
+          </div>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 9: Linear Regression<small>All the code of this program in one
+                place. Paste it and run it at once.</small></span><button class="copy copy-all" type="button">Copy all
+              code</button></div>
+          <pre><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LinearRegression
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> mean_squared_error, r2_score
 
-<!-- ============ BDA ============ -->
-<section class="lab" id="bda" style="--c:var(--bd)">
-  <div class="lab-head"><h2>Big Data Analytics Lab</h2><span class="where">Run on the <b>college lab computer</b> (no website)</span></div>
-  <div class="howto">
-    <h4>How to run</h4>
-    <ul>
-      <li>This lab is practical, not only theory. You need Java, Hadoop and Hive installed, which the college lab computer should already have.</li>
-      <li>Program 1 (installing Hadoop) is a procedure you write step by step.</li>
-      <li>Programs 2 and 7–10 are commands typed into Command Prompt (Hadoop) or the Hive shell.</li>
-      <li>Programs 3–6 are Java MapReduce programs: compile them into a <b>.jar</b> and run with <b>hadoop jar ...</b>.</li>
-    </ul>
-  </div>
+<span class="c"># Step 1: Create dataset</span>
+data = {
+ <span class="s">'Hours_Study'</span>: [1,2,3,4,5,6,7,8,9,10],
+ <span class="s">'Classes_Attended'</span>: [10,12,13,15,16,14,13,16,17,18],
+ <span class="s">'Previous_Test_Scores'</span>: [60,65,70,75,80,85,88,90,85,95],
+ <span class="s">'Final_Grade'</span>: [62,68,72,78,85,90,88,92,91,94]
+}
+df = pd.DataFrame(data)
 
-  <article class="prog">
-    <h3>Program 2: HDFS file management <span class="tag">PDF Program 2</span></h3>
-    <div class="question"><p>Implement the following file management tasks in Hadoop: adding files and directories; creating files, retrieving files and deleting files.</p></div>
-    <p class="sol">Solution</p>
-    <p class="step">1. Start Hadoop services</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>start-dfs.cmd
-start-yarn.cmd</pre></div>
-    <p class="step">2. Add a directory</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>hdfs dfs -mkdir /my_directory
-hdfs dfs -ls /</pre></div>
-    <p class="step">3. Add a file</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>echo Welcome to Hadoop File Management &gt; C:\HadoopData\welcome.txt
-hdfs dfs -put C:\HadoopData\welcome.txt /my_directory</pre></div>
-    <p class="step">4. Create a file</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>hdfs dfs -touchz /my_directory/empty_file.txt
-hdfs dfs -ls /my_directory</pre></div>
-    <p class="step">5. Retrieve a file</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>hdfs dfs -cat /my_directory/welcome.txt
-hdfs dfs -get /my_directory/welcome.txt C:\HadoopData\retrieved_welcome.txt</pre></div>
-    <p class="step">6. Delete a file and directory</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>hdfs dfs -rm /my_directory/empty_file.txt
-hdfs dfs -rm -r /my_directory</pre></div>
-    <div class="out"><div class="label">Output (of -cat)</div><div class="code"><pre>Welcome to Hadoop File Management</pre></div></div>
-  </article>
+<span class="c"># Step 2: Features and target</span>
+X = df[[<span class="s">'Hours_Study'</span>,<span class="s">'Classes_Attended'</span>,<span class="s">'Previous_Test_Scores'</span>]]
+y = df[<span class="s">'Final_Grade'</span>]
 
-  <article class="prog">
-    <h3>Program 9: Querying data in Hive <span class="tag">PDF Program 9</span></h3>
-    <div class="question"><p>Using Hive, query the data from the database tables.</p></div>
-    <p class="sol">Solution</p>
-    <p class="step">1. Start Hive and create the table</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre>hive
+<span class="c"># Step 3: Split and train</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="n">0.2</span>, random_state=<span class="n">42</span>)
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="c"># Step 4: Evaluate</span>
+y_pred = model.predict(X_test)
+print(<span class="s">f"Mean Squared Error (MSE): {mean_squared_error(y_test, y_pred):.2f}"</span>)
+print(<span class="s">f"R-squared (R2): {r2_score(y_test, y_pred):.2f}"</span>)
+
+<span class="c"># Step 5: Graph</span>
+plt.scatter(X[<span class="s">'Hours_Study'</span>], y, color=<span class="s">'blue'</span>, label=<span class="s">'Actual Data'</span>)
+plt.plot(X[<span class="s">'Hours_Study'</span>], model.predict(X), color=<span class="s">'red'</span>, label=<span class="s">'Regression Line'</span>)
+plt.xlabel(<span class="s">"Hours of Study"</span>)
+plt.ylabel(<span class="s">"Final Grade"</span>)
+plt.legend()
+plt.show()
+
+<span class="c"># Step 6: Predict new data</span>
+new = pd.DataFrame({<span class="s">'Hours_Study'</span>:[3], <span class="s">'Classes_Attended'</span>:[14], <span class="s">'Previous_Test_Scores'</span>:[72]})
+print(<span class="s">f"Predicted Final Grade: {model.predict(new)[0]:.2f}"</span>)</pre>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ BDA ============ -->
+    <section class="lab" id="bda" style="--c:var(--bd)">
+      <div class="lab-head">
+        <h2>Big Data Analytics Lab</h2><span class="where">Run on the <b>college lab computer</b> (no website)</span>
+      </div>
+      <div class="howto">
+        <h4>How to run</h4>
+        <ul>
+          <li>This lab is practical, not only theory. You need Java, Hadoop and Hive installed, which the college lab
+            computer should already have.</li>
+          <li>Program 1 (installing Hadoop) is a procedure you write step by step.</li>
+          <li>Programs 2 and 7–10 are commands typed into Command Prompt (Hadoop) or the Hive shell.</li>
+          <li>Programs 3–6 are Java MapReduce programs: compile them into a <b>.jar</b> and run with <b>hadoop jar
+              ...</b>.</li>
+        </ul>
+        <div class="runopts">
+          <h4>Other places to run</h4>
+          <ul>
+            <li><b>Hive queries (Program 9) for practice</b>: Hive SQL is close to normal SQL, so you can try the
+              <code>SELECT</code>, <code>WHERE</code>, <code>ORDER BY</code>, <code>GROUP BY</code> and
+              <code>LIMIT</code> queries on <a href="https://onecompiler.com/mysql" target="_blank"
+                rel="noopener">OneCompiler (MySQL)</a>. Change <code>STRING</code> to <code>VARCHAR(20)</code> and
+              remove the <code>ROW FORMAT ...</code> line there. In the exam, use the real Hive shell.
+            </li>
+            <li><b>HDFS commands (Program 2)</b>: there's no reliable free website. Use the college lab computer, or
+              install Hadoop on your own laptop (slow and error-prone on Windows).</li>
+          </ul>
+        </div>
+      </div>
+
+      <article class="prog">
+        <h3>Program 2: HDFS file management <span class="tag">PDF Program 2</span></h3>
+        <div class="question">
+          <p>Implement the following file management tasks in Hadoop: adding files and directories; creating files,
+            retrieving files and deleting files.</p>
+        </div>
+        <p class="sol">Solution</p>
+        <p class="step">1. Start Hadoop services</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>start-dfs.cmd
+start-yarn.cmd</pre>
+        </div>
+        <p class="step">2. Add a directory</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>hdfs dfs -mkdir /my_directory
+hdfs dfs -ls /</pre>
+        </div>
+        <p class="step">3. Add a file</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>echo Welcome to Hadoop File Management &gt; C:\HadoopData\welcome.txt
+hdfs dfs -put C:\HadoopData\welcome.txt /my_directory</pre>
+        </div>
+        <p class="step">4. Create a file</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>hdfs dfs -touchz /my_directory/empty_file.txt
+hdfs dfs -ls /my_directory</pre>
+        </div>
+        <p class="step">5. Retrieve a file</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>hdfs dfs -cat /my_directory/welcome.txt
+hdfs dfs -get /my_directory/welcome.txt C:\HadoopData\retrieved_welcome.txt</pre>
+        </div>
+        <p class="step">6. Delete a file and directory</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>hdfs dfs -rm /my_directory/empty_file.txt
+hdfs dfs -rm -r /my_directory</pre>
+        </div>
+        <div class="out">
+          <div class="label">Output (of -cat)</div>
+          <div class="code">
+            <pre>Welcome to Hadoop File Management</pre>
+          </div>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 2: HDFS file management<small>All the code of this program in
+                one place. Paste it and run it at once.</small></span><button class="copy copy-all" type="button">Copy
+              all code</button></div>
+          <pre>start-dfs.cmd
+start-yarn.cmd
+
+hdfs dfs -mkdir /my_directory
+hdfs dfs -ls /
+
+echo Welcome to Hadoop File Management &gt; C:\HadoopData\welcome.txt
+hdfs dfs -put C:\HadoopData\welcome.txt /my_directory
+
+hdfs dfs -touchz /my_directory/empty_file.txt
+hdfs dfs -ls /my_directory
+
+hdfs dfs -cat /my_directory/welcome.txt
+hdfs dfs -get /my_directory/welcome.txt C:\HadoopData\retrieved_welcome.txt
+
+hdfs dfs -rm /my_directory/empty_file.txt
+hdfs dfs -rm -r /my_directory</pre>
+        </div>
+      </article>
+
+      <article class="prog">
+        <h3>Program 9: Querying data in Hive <span class="tag">PDF Program 9</span></h3>
+        <div class="question">
+          <p>Using Hive, query the data from the database tables.</p>
+        </div>
+        <p class="sol">Solution</p>
+        <p class="step">1. Start Hive and create the table</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre>hive
 <span class="k">CREATE DATABASE</span> StudentDB;
 <span class="k">USE</span> StudentDB;
 <span class="k">CREATE TABLE</span> student (id <span class="k">INT</span>, name <span class="k">STRING</span>, age <span class="k">INT</span>, grade <span class="k">STRING</span>)
 <span class="k">ROW FORMAT DELIMITED FIELDS TERMINATED BY</span> <span class="s">','</span>;
-<span class="k">INSERT INTO TABLE</span> student <span class="k">VALUES</span> (1,<span class="s">'Alice'</span>,20,<span class="s">'A'</span>), (2,<span class="s">'Bob'</span>,22,<span class="s">'B'</span>), (3,<span class="s">'Charlie'</span>,21,<span class="s">'A'</span>);</pre></div>
-    <p class="step">2. Display all records</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> student;</pre></div>
-    <p class="step">3. Filter with WHERE</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> grade = <span class="s">'A'</span>;
-<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> age &gt; <span class="n">20</span>;</pre></div>
-    <p class="step">4. Sort with ORDER BY</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">ORDER BY</span> age <span class="k">ASC</span>;</pre></div>
-    <p class="step">5. Group with GROUP BY</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> grade, COUNT(*) <span class="k">AS</span> student_count <span class="k">FROM</span> student <span class="k">GROUP BY</span> grade;</pre></div>
-    <p class="step">6. Aggregate functions</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> AVG(age) <span class="k">AS</span> average_age <span class="k">FROM</span> student;
-<span class="k">SELECT</span> MAX(age) <span class="k">AS</span> max_age <span class="k">FROM</span> student;</pre></div>
-    <p class="step">7. Limit the output</p>
-    <div class="code"><button class="copy" type="button">Copy</button><pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">LIMIT</span> <span class="n">3</span>;</pre></div>
-    <div class="out"><div class="label">Output (of GROUP BY)</div><div class="code"><pre>A    2
-B    1</pre></div></div>
-  </article>
-</section>
+<span class="k">INSERT INTO TABLE</span> student <span class="k">VALUES</span> (1,<span class="s">'Alice'</span>,20,<span class="s">'A'</span>), (2,<span class="s">'Bob'</span>,22,<span class="s">'B'</span>), (3,<span class="s">'Charlie'</span>,21,<span class="s">'A'</span>);</pre>
+        </div>
+        <p class="step">2. Display all records</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> student;</pre>
+        </div>
+        <p class="step">3. Filter with WHERE</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> grade = <span class="s">'A'</span>;
+<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> age &gt; <span class="n">20</span>;</pre>
+        </div>
+        <p class="step">4. Sort with ORDER BY</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">ORDER BY</span> age <span class="k">ASC</span>;</pre>
+        </div>
+        <p class="step">5. Group with GROUP BY</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> grade, COUNT(*) <span class="k">AS</span> student_count <span class="k">FROM</span> student <span class="k">GROUP BY</span> grade;</pre>
+        </div>
+        <p class="step">6. Aggregate functions</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> AVG(age) <span class="k">AS</span> average_age <span class="k">FROM</span> student;
+<span class="k">SELECT</span> MAX(age) <span class="k">AS</span> max_age <span class="k">FROM</span> student;</pre>
+        </div>
+        <p class="step">7. Limit the output</p>
+        <div class="code"><button class="copy" type="button">Copy</button>
+          <pre><span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">LIMIT</span> <span class="n">3</span>;</pre>
+        </div>
+        <div class="out">
+          <div class="label">Output (of GROUP BY)</div>
+          <div class="code">
+            <pre>A    2
+B    1</pre>
+          </div>
+        </div>
+        <div class="full">
+          <div class="full-head"><span>Full code: Program 9: Querying data in Hive<small>All the code of this program in
+                one place. Paste it and run it at once.</small></span><button class="copy copy-all" type="button">Copy
+              all code</button></div>
+          <pre>hive
+<span class="k">CREATE DATABASE</span> StudentDB;
+<span class="k">USE</span> StudentDB;
+<span class="k">CREATE TABLE</span> student (id <span class="k">INT</span>, name <span class="k">STRING</span>, age <span class="k">INT</span>, grade <span class="k">STRING</span>)
+<span class="k">ROW FORMAT DELIMITED FIELDS TERMINATED BY</span> <span class="s">','</span>;
+<span class="k">INSERT INTO TABLE</span> student <span class="k">VALUES</span> (1,<span class="s">'Alice'</span>,20,<span class="s">'A'</span>), (2,<span class="s">'Bob'</span>,22,<span class="s">'B'</span>), (3,<span class="s">'Charlie'</span>,21,<span class="s">'A'</span>);
 
-<div class="avoid">
-  <h4>Programs to avoid in the exam</h4>
-  <ul>
-    <li>DBMS Programs 4, 6 and 7: the manual's answers have errors.</li>
-    <li>ML Program 3 (Candidate Elimination): the manual's code has errors.</li>
-    <li>Big Data Program 10, Part C (Hive indexes): does not work on newer Hive versions.</li>
-  </ul>
-</div>
+<span class="k">SELECT</span> * <span class="k">FROM</span> student;
 
-<footer>
-  <p><b>What was corrected from the manual:</b></p>
-  <ul>
-    <li>DBMS Program 1: the manual's insert still had marks after that column was dropped, and the date '4-6-1984' gives an error in Oracle. Fixed with TO_DATE(...).</li>
-    <li>DBMS Program 2: the manual's insert was missing the year value. Added.</li>
-    <li>ML Program 8: the long classification report was removed to keep it short (optional lines given above). Accuracy is the same.</li>
-    <li>ML Program 9 and Big Data Programs 2 and 9: same as the manual, written shorter and cleaner.</li>
-  </ul>
-</footer>
-</div>
+<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> grade = <span class="s">'A'</span>;
+<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">WHERE</span> age &gt; <span class="n">20</span>;
 
-<script>
-document.querySelectorAll('.copy').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var pre = btn.parentElement.querySelector('pre');
-    var text = pre.innerText;
-    function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1500); }
-    function fallback(){
-      var r = document.createRange(); r.selectNodeContents(pre);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Selected';
-      setTimeout(function(){ btn.textContent = 'Copy'; }, 1500);
-    }
-    try {
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } catch(e){ fallback(); }
-  });
-});
-</script>
+<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">ORDER BY</span> age <span class="k">ASC</span>;
 
-</body></html>
+<span class="k">SELECT</span> grade, COUNT(*) <span class="k">AS</span> student_count <span class="k">FROM</span> student <span class="k">GROUP BY</span> grade;
+
+<span class="k">SELECT</span> AVG(age) <span class="k">AS</span> average_age <span class="k">FROM</span> student;
+<span class="k">SELECT</span> MAX(age) <span class="k">AS</span> max_age <span class="k">FROM</span> student;
+
+<span class="k">SELECT</span> * <span class="k">FROM</span> student <span class="k">LIMIT</span> <span class="n">3</span>;</pre>
+        </div>
+      </article>
+    </section>
+
+    <div class="avoid">
+      <h4>Programs to avoid in the exam</h4>
+      <ul>
+        <li>DBMS Programs 4, 6 and 7: the manual's answers have errors.</li>
+        <li>ML Program 3 (Candidate Elimination): the manual's code has errors.</li>
+        <li>Big Data Program 10, Part C (Hive indexes): does not work on newer Hive versions.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p><b>What was corrected from the manual:</b></p>
+      <ul>
+        <li>DBMS Program 1: the manual's insert still had marks after that column was dropped, and the date '4-6-1984'
+          gives an error in Oracle. Fixed with TO_DATE(...).</li>
+        <li>DBMS Program 2: the manual's insert was missing the year value. Added.</li>
+        <li>ML Program 8: the long classification report was removed to keep it short (optional lines given above).
+          Accuracy is the same.</li>
+        <li>ML Program 9 and Big Data Programs 2 and 9: same as the manual, written shorter and cleaner.</li>
+      </ul>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pre = btn.closest('.code, .full').querySelector('pre');
+        var label = btn.textContent;
+        var text = pre.innerText;
+        function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = label; }, 1500); }
+        function fallback() {
+          var r = document.createRange(); r.selectNodeContents(pre);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          btn.textContent = 'Selected';
+          setTimeout(function () { btn.textContent = label; }, 1500);
+        }
+        try {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } catch (e) { fallback(); }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
